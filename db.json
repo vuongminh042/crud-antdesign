@@ -1,0 +1,34 @@
+{
+  "products": [
+    {
+      "name": "sanpham 3",
+      "price": 300,
+      "description": "mo ta san pham 3",
+      "id": "e585"
+    },
+    {
+      "name": "sanpham 4",
+      "price": 400,
+      "description": "mo ta san pham 4",
+      "id": "c2c6"
+    },
+    {
+      "name": "sanpham 5",
+      "price": 500,
+      "description": "mo ta san pham 5",
+      "id": "79fb"
+    },
+    {
+      "id": "fc7c",
+      "name": "san pham 88",
+      "price": 8000,
+      "description": "mo ta san pham 88"
+    },
+    {
+      "id": "471d",
+      "name": "san pham 10000",
+      "price": 244,
+      "description": "mo ta san pham 10000"
+    }
+  ]
+}
