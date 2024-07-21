@@ -1,15 +1,15 @@
 {
   "products": [
     {
-      "name": "san pham 1",
+      "name": "san pham 1 update",
       "price": 100,
-      "description": "mo ta san pham 1 \n\n ",
+      "description": "mo ta san pham 1 update\n\n ",
       "id": "3d7f"
     },
     {
-      "name": "san pham 2 update",
+      "name": "san pham 2 ",
       "price": 200,
-      "description": "mo ta san pham 2 update",
+      "description": "mo ta san pham 2",
       "id": "ec70"
     },
     {

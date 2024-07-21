@@ -41,14 +41,11 @@ const ProductEdit: React.FC = () => {
             if (id) {
                 await axios.put(`http://localhost:3000/products/${id}`, values);
                 message.success('Product updated successfully!');
-            } else {
-                await axios.post('http://localhost:3000/products', values);
-                message.success('Product added successfully!');
             }
             navigate('/products');
         } catch (error) {
             console.error('Error:', error);
-            message.error(`Failed to ${id ? 'update' : 'add'} product. Please try again.`);
+            message.error('Failed to update product. Please try again.');
         }
     };
 
