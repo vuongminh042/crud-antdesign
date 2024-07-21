@@ -95,9 +95,7 @@ const ProductEdit: React.FC = () => {
                     <Button type="primary" htmlType="submit" loading={loading}>
                         Submit
                     </Button>
-                    {/* <Link type="primary" to="/products">
-                        Back
-                    </Link> */}
+
                 </Form.Item>
             </Form>
         </div>
