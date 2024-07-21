@@ -55,7 +55,7 @@ const ProductEdit: React.FC = () => {
 
     return (
         <div style={{ maxWidth: 600, margin: '0 auto' }}>
-            <h1>{id ? 'Edit Product' : 'Add Product'}</h1>
+            <h1>Edit Product</h1>
             <Form
                 form={form}
                 name="basic"
