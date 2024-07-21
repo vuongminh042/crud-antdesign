@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import type { FormProps } from 'antd';
 import { Button, Form, Input, InputNumber, message } from 'antd';
 import axios from 'axios';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
-type FieldType = {
+type FormData = {
     name?: string;
     price?: number;
     description?: string;
@@ -33,7 +33,7 @@ const ProductEdit: React.FC = () => {
         }
     }, [id, form]);
 
-    const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+    const onFinish: FormProps<FormData>['onFinish'] = async (values) => {
         try {
             if (id) {
                 await axios.put(`http://localhost:3000/products/${id}`, values);
@@ -49,7 +49,7 @@ const ProductEdit: React.FC = () => {
         }
     };
 
-    const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
+    const onFinishFailed: FormProps<FormData>['onFinishFailed'] = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
 
@@ -67,7 +67,7 @@ const ProductEdit: React.FC = () => {
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
-                <Form.Item<FieldType>
+                <Form.Item<FormData>
                     label="Name"
                     name="name"
                     rules={[{ required: true, message: 'Please input the product name!' }]}
@@ -75,7 +75,7 @@ const ProductEdit: React.FC = () => {
                     <Input />
                 </Form.Item>
 
-                <Form.Item<FieldType>
+                <Form.Item<FormData>
                     label="Price"
                     name="price"
                     rules={[{ required: true, message: 'Please input the product price!' }]}
@@ -83,7 +83,7 @@ const ProductEdit: React.FC = () => {
                     <InputNumber min={0} style={{ width: '100%' }} />
                 </Form.Item>
 
-                <Form.Item<FieldType>
+                <Form.Item<FormData>
                     label="Description"
                     name="description"
                     rules={[{ required: true, message: 'Please input the product description!' }]}

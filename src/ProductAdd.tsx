@@ -4,15 +4,15 @@ import { Button, Form, Input, InputNumber, message } from 'antd';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-type FieldType = {
+type FormData = {
     name?: string;
     price?: number;
     description?: string;
 };
 
-const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+const onFinish: FormProps<FormData>['onFinish'] = async (values) => {
     try {
-        // Replace 'your-api-endpoint' with the actual API endpoint
+
         const response = await axios.post('http://localhost:3000/products', values);
         message.success('Product added successfully!');
         console.log('Success:', response.data);
@@ -22,7 +22,7 @@ const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     }
 };
 
-const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
+const onFinishFailed: FormProps<FormData>['onFinishFailed'] = (errorInfo) => {
     console.log('Failed:', errorInfo);
 };
 
@@ -39,7 +39,7 @@ const ProductAdd: React.FC = () => (
             onFinishFailed={onFinishFailed}
             autoComplete="off"
         >
-            <Form.Item<FieldType>
+            <Form.Item<FormData>
                 label="Name"
                 name="name"
                 rules={[{ required: true, message: 'Please input the product name!' }]}
@@ -47,7 +47,7 @@ const ProductAdd: React.FC = () => (
                 <Input />
             </Form.Item>
 
-            <Form.Item<FieldType>
+            <Form.Item<FormData>
                 label="Price"
                 name="price"
                 rules={[{ required: true, message: 'Please input the product price!' }]}
@@ -55,7 +55,7 @@ const ProductAdd: React.FC = () => (
                 <InputNumber min={0} style={{ width: '100%' }} />
             </Form.Item>
 
-            <Form.Item<FieldType>
+            <Form.Item<FormData>
                 label="Description"
                 name="description"
                 rules={[{ required: true, message: 'Please input the product description!' }]}
