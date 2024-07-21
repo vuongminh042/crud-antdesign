@@ -1,15 +1,15 @@
 {
   "products": [
     {
-      "name": "sanpham 3",
+      "name": "sanpham 3 update",
       "price": 300,
-      "description": "mo ta san pham 3",
+      "description": "mo ta san pham 3 update",
       "id": "e585"
     },
     {
-      "name": "sanpham 4",
-      "price": 400,
-      "description": "mo ta san pham 4",
+      "name": "sanpham 4 update",
+      "price": 100000,
+      "description": "mo ta san pham 4 update",
       "id": "c2c6"
     },
     {
