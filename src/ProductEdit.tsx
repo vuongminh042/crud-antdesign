@@ -17,21 +17,24 @@ const ProductEdit: React.FC = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if (id) {
-            setLoading(true);
-
-            axios.get(`http://localhost:3000/products/${id}`)
-                .then((response) => {
+        const fetchProduct = async () => {
+            if (id) {
+                setLoading(true);
+                try {
+                    const response = await axios.get(`http://localhost:3000/products/${id}`);
                     form.setFieldsValue(response.data);
-                    setLoading(false);
-                })
-                .catch((error) => {
+                } catch (error) {
                     console.error('Error fetching product:', error);
                     message.error('Failed to fetch product. Please try again.');
+                } finally {
                     setLoading(false);
-                });
-        }
+                }
+            }
+        };
+
+        fetchProduct();
     }, [id, form]);
+
 
     const onFinish: FormProps<FormData>['onFinish'] = async (values) => {
         try {

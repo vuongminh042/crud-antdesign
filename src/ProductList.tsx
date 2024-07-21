@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 
-
+// Khai báo kiểu dữ liệu
 interface TProduct {
     id: number;
     name: string;
@@ -15,6 +15,7 @@ interface TProduct {
     description: string;
 }
 
+// Call API để lấy dữ liệu
 const fetchProducts = async (): Promise<TProduct[]> => {
     const response = await axios.get('http://localhost:3000/products');
     return response.data;
@@ -88,8 +89,8 @@ const ProductList: React.FC = () => {
                 columns={columns}
                 dataSource={preparedData}
                 expandable={{
-                    expandedRowRender: (record) => <p style={{ margin: 0 }}>{record.description}</p>,
-                    rowExpandable: (record) => record.name !== 'Not Expandable',
+                    expandedRowRender: (product) => <p style={{ margin: 0 }}>{product.description}</p>,
+                    rowExpandable: (product) => product.name !== 'Not Expandable',
                 }}
             />
         </div>

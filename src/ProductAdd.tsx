@@ -12,7 +12,6 @@ type FormData = {
 
 const onFinish: FormProps<FormData>['onFinish'] = async (values) => {
     try {
-
         const response = await axios.post('http://localhost:3000/products', values);
         message.success('Product added successfully!');
         console.log('Success:', response.data);

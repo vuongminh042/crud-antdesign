@@ -1,34 +1,34 @@
 {
   "products": [
     {
-      "name": "sanpham 3 update",
+      "name": "san pham 1",
+      "price": 100,
+      "description": "mo ta san pham 1 \n\n ",
+      "id": "3d7f"
+    },
+    {
+      "name": "san pham 2 update",
+      "price": 200,
+      "description": "mo ta san pham 2 update",
+      "id": "ec70"
+    },
+    {
+      "id": "ca06",
+      "name": "san pham 3",
       "price": 300,
-      "description": "mo ta san pham 3 update",
-      "id": "e585"
+      "description": "mo ta san pham 3"
     },
     {
-      "name": "sanpham 4 update",
-      "price": 100000,
-      "description": "mo ta san pham 4 update",
-      "id": "c2c6"
+      "id": "3334",
+      "name": "san pham 4",
+      "price": 400,
+      "description": "mo ta san pham 4"
     },
     {
-      "name": "sanpham 5",
+      "id": "6e5e",
+      "name": "san pham 5",
       "price": 500,
-      "description": "mo ta san pham 5",
-      "id": "79fb"
-    },
-    {
-      "id": "fc7c",
-      "name": "san pham 88",
-      "price": 8000,
-      "description": "mo ta san pham 88"
-    },
-    {
-      "id": "471d",
-      "name": "san pham 10000",
-      "price": 244,
-      "description": "mo ta san pham 10000"
+      "description": "mo ta san pham 5"
     }
   ]
 }
