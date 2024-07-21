@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import type { FormProps } from 'antd';
-import { Button, Form, Input, InputNumber, message } from 'antd';
+import { Button, Form, FormProps, Input, InputNumber, message } from 'antd';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
 
 type FormData = {
     name?: string;
@@ -10,96 +9,94 @@ type FormData = {
     description?: string;
 };
 
-const ProductEdit: React.FC = () => {
-    const [form] = Form.useForm();
+const EditProduct: React.FC = () => {
+    const [form] = Form.useForm<FormData>();
     const { id } = useParams<{ id: string }>();
-    const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchProduct = async () => {
-            if (id) {
-                setLoading(true);
-                try {
-                    const response = await axios.get(`http://localhost:3000/products/${id}`);
-                    form.setFieldsValue(response.data);
-                } catch (error) {
-                    console.error('Error fetching product:', error);
-                    message.error('Failed to fetch product. Please try again.');
-                } finally {
-                    setLoading(false);
-                }
+            try {
+                const response = await axios.get(`http://localhost:3000/products/${id}`);
+                form.setFieldsValue(response.data);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching product', error);
+                message.error('Failed to fetch product data');
+                setLoading(false);
             }
         };
-
         fetchProduct();
     }, [id, form]);
 
-
     const onFinish: FormProps<FormData>['onFinish'] = async (values) => {
         try {
-            if (id) {
-                await axios.put(`http://localhost:3000/products/${id}`, values);
-                message.success('Product updated successfully!');
-            }
-            navigate('/products');
+            const response = await axios.put(`http://localhost:3000/products/${id}`, values);
+            message.success('Update Successful');
+            return response.data;
         } catch (error) {
-            console.error('Error:', error);
-            message.error('Failed to update product. Please try again.');
+            console.error('Error', error);
+            message.error('Update Failed');
         }
     };
 
     const onFinishFailed: FormProps<FormData>['onFinishFailed'] = (errorInfo) => {
-        console.log('Failed:', errorInfo);
+        console.log('Failed: ', errorInfo);
     };
 
     return (
         <div style={{ maxWidth: 600, margin: '0 auto' }}>
             <h1>Edit Product</h1>
-            <Form
-                form={form}
-                name="basic"
-                labelCol={{ span: 8 }}
-                wrapperCol={{ span: 16 }}
-                style={{ maxWidth: 600 }}
-                initialValues={{ remember: true }}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
-                autoComplete="off"
-            >
-                <Form.Item<FormData>
-                    label="Name"
-                    name="name"
-                    rules={[{ required: true, message: 'Please input the product name!' }]}
+            {!loading ? (
+                <Form
+                    form={form}
+                    name="basic"
+                    labelCol={{ span: 8 }}
+                    wrapperCol={{ span: 16 }}
+                    style={{ maxWidth: 600 }}
+                    initialValues={{ remember: true }}
+                    onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}
+                    autoComplete="off"
                 >
-                    <Input />
-                </Form.Item>
+                    <Form.Item<FormData>
+                        label="Name"
+                        name="name"
+                        rules={[{ required: true, message: 'Please input the product name!' }]}
+                    >
+                        <Input />
+                    </Form.Item>
 
-                <Form.Item<FormData>
-                    label="Price"
-                    name="price"
-                    rules={[{ required: true, message: 'Please input the product price!' }]}
-                >
-                    <InputNumber min={0} style={{ width: '100%' }} />
-                </Form.Item>
+                    <Form.Item<FormData>
+                        label="Price"
+                        name="price"
+                        rules={[{ required: true, message: 'Please input the product price!' }]}
+                    >
+                        <InputNumber min={0} style={{ width: '100%' }} />
+                    </Form.Item>
 
-                <Form.Item<FormData>
-                    label="Description"
-                    name="description"
-                    rules={[{ required: true, message: 'Please input the product description!' }]}
-                >
-                    <Input.TextArea rows={4} />
-                </Form.Item>
+                    <Form.Item<FormData>
+                        label="Description"
+                        name="description"
+                        rules={[{ required: true, message: 'Please input the product description!' }]}
+                    >
+                        <Input.TextArea rows={4} />
+                    </Form.Item>
 
-                <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                    <Button type="primary" htmlType="submit" loading={loading}>
-                        Submit
-                    </Button>
-
-                </Form.Item>
-            </Form>
+                    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                        <Button type="primary" htmlType="submit">
+                            Submit
+                        </Button>
+                        <Link type="primary" to="/products">
+                            Back
+                        </Link>
+                    </Form.Item>
+                </Form>
+            ) : (
+                <p>Loading...</p>
+            )}
         </div>
     );
 };
 
-export default ProductEdit;
+export default EditProduct;
