@@ -15,7 +15,6 @@ interface TProduct {
     description: string;
 }
 
-// Fetch function for products
 const fetchProducts = async (): Promise<TProduct[]> => {
     const response = await axios.get('http://localhost:3000/products');
     return response.data;
@@ -24,13 +23,12 @@ const fetchProducts = async (): Promise<TProduct[]> => {
 const ProductList: React.FC = () => {
     const queryClient = useQueryClient();
 
-    // Use useQuery to fetch data
     const { data, isLoading, error } = useQuery({
         queryKey: ['products'],
         queryFn: fetchProducts,
     });
 
-    // Use useMutation for deleting products
+
     const mutation = useMutation({
         mutationFn: async (id: number) => {
             const confirm = window.confirm('Do you want to delete this product?');
@@ -47,7 +45,6 @@ const ProductList: React.FC = () => {
         }
     });
 
-    // Define columns for the table
     const columns: TableColumnsType<TProduct> = [
         { title: 'STT', dataIndex: 'index', key: 'index' },
         { title: 'Name', dataIndex: 'name', key: 'name' },
@@ -75,10 +72,10 @@ const ProductList: React.FC = () => {
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error loading products</div>;
 
-    // Prepare data for the table
+
     const preparedData = data.map((product: TProduct, index: number) => ({
         ...product,
-        key: product.id, // Ensure each item has a unique key
+        key: product.id,
         index: index + 1
     }));
 
